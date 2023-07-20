@@ -28,7 +28,6 @@ resource "equinix_network_ssh_user" "multicloud" {
   ]
 }
 
-
 resource "equinix_network_device" "multi-cloud-router" {
   name            = "tf-multi-cloud"
   metro_code      = data.equinix_network_account.multicloud.metro_code
