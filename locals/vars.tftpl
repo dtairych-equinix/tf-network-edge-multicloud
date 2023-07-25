@@ -1,0 +1,14 @@
+user_: "${ssh_user}"
+pass_: "${ssh_password}"
+ne_ip: "${ne_ip}"
+hostname: "${ne_hostname}"
+local_asn: "${ne_asn}"
+clouds: 
+%{ for index, group in clouds ~}
+  - cloud: ${ group.name }
+    interface: ${ group.ne_interface }
+    interface_ip: ${ group.interface_ip }
+    remote_ip: ${ group.remote_ip }
+    remote_asn: ${ group.remote_asn }
+    bgp_password: ${ group.bgp_password }
+%{ endfor ~}
