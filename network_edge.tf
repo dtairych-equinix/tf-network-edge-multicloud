@@ -27,7 +27,7 @@ resource "equinix_network_device" "multi-cloud-router" {
   self_managed    = true
   byol            = true
   package_code    = "network-essentials"
-  notifications   = [var.equinix_fabric_user]
+  notifications   = var.equinix_fabric_users
   hostname        = "mc-router"
   account_number  = data.equinix_network_account.multicloud.number
   version         = "17.11.01a"
