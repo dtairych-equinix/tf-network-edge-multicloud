@@ -131,11 +131,6 @@ variable "aws_secret" {
   sensitive = true
 }
 
-variable "bgp_password" {
-  type = string
-  sensitive = true
-}
-
 variable "drg_asn" {
   description = "ASN of the Oracle Cloud DRG"
   type = string
