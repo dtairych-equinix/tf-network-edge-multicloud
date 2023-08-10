@@ -8,10 +8,6 @@ equinix_fabric_account_name = "Equinix Fabric "
 ssh_user = "SSH username for Network Edge device"
 ssh_password = "SSH password for Network Edge device"
 
-oci_drg_id = "Oracle Cloud ID for the Dynamic Routing Gateway"
-oci_compartment_id = "Compartment ID for the resources deployed in OCI"
-
-
 aws_account_id = "AWS Account ID"
 aws_access = "AWS Access Key"
 aws_secret = "AWS Secret Key"

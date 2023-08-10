@@ -43,35 +43,7 @@ variable "network_edge_metro" {
   default = "FR"
 }
 
-# variable "deployment_metro" {
-#   type    = string
-#   default = "fr"
-# }
-
-# variable "oci_auth" {
-#     description = "Oracle Cloud authentication token for API access"
-#   type = string
-#   sensitive = true
-# }
-
-# variable "oci_drg_id" {
-#   description = "OCID of the Oracle Cloud DRG to connect to"
-#   type = string
-#   sensitive = true
-# }
-
-variable "oci_compartment_id" {
-  description = "The Compartment ID for all the Oracle Cloud resources"
-  type = string
-  sensitive = true
-}
-
-#######  AWS Variables #########
-
-variable "aws_dxg_name" {
-  type = string
-  sensitive = true
-}
+#######  Network Edge Credentials #######
 
 variable "ssh_user" {
   type = string
@@ -83,29 +55,11 @@ variable "ssh_password" {
   sensitive = true 
 }
 
-variable "oci_interface" {
-  description = "Interface on the Network Edge device to connect the OCI FastConnect to"
-  type = string
-  default = "3"
-}
+#######  AWS Variables #########
 
-variable "aws_interface" {
-  description = "Interface on the Network Edge device to connect the AWS Direct Connect to"
+variable "aws_dxg_name" {
   type = string
-  default = "4"
-}
-
-variable "oci_interconnect_network" {
-  description = "Network that will be used to interconnect Network Edge to Oracle (Fastconnect).  Must be a /30"
-  type = string
-  default = "192.168.3.0/30"
-
-}
-
-variable "aws_interconnect_network" {
-  description = "Network that will be used to interconnect Network Edge to AWS (Direct Connect).  Must be a /30"
-  type = string
-  default = "192.168.4.0/30"
+  sensitive = true
 }
 
 variable "aws_account_id" {
@@ -131,23 +85,7 @@ variable "aws_secret" {
   sensitive = true
 }
 
-variable "drg_asn" {
-  description = "ASN of the Oracle Cloud DRG"
-  type = string
-  default = "31898"
-}
-
-variable "dxg_asn" {
-  description = "ASN of the AWS Private VIF"
-  type = string
-  default = "64512"
-}
-
-variable "network_edge_asn" {
-  description = "ASN of the Equinix Network Edge device"
-  type = string
-  default = "65000"
-}
+##### Cloud Networking  ########
 
 variable "clouds" {
   description = "A collection of the various multi-cloud environments that will be connected"
