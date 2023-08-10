@@ -39,3 +39,5 @@ rsa_private_key
 
 # Ignore all fully formed Except files
 *.exp
+
+archive

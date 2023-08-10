@@ -15,17 +15,9 @@ resource "equinix_network_acl_template" "inbound_access" {
 }
 
 resource "equinix_network_ssh_key" "terraform" {
-  name       = "multi-cloud-terraform"
+  name       = "multi-cloud-tf"
   public_key = tls_private_key.multi-cloud.public_key_openssh
 
-}
-
-resource "equinix_network_ssh_user" "multicloud" {
-  username = var.ssh_user
-  password = var.ssh_password
-  device_ids = [
-    equinix_network_device.multi-cloud-router.uuid
-  ]
 }
 
 resource "equinix_network_device" "multi-cloud-router" {
@@ -38,7 +30,7 @@ resource "equinix_network_device" "multi-cloud-router" {
   notifications   = [var.equinix_fabric_user]
   hostname        = "mc-router"
   account_number  = data.equinix_network_account.multicloud.number
-  version         = "17.06.01a"
+  version         = "17.11.01a"
   core_count      = 2
   term_length     = 1
   ssh_key {

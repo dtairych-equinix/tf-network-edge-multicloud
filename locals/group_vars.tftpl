@@ -1,0 +1,30 @@
+# ansible_connection : local
+# ansible_python_interpreter : /usr/bin/python3
+# host_key_checking : False
+# ansible_ssh_user : dtairych
+# ansible_ssh_pass : newpassword
+# ansible_port: 8181
+
+# commands:
+#   - "show version"
+#   - "show ip interface brief"
+
+# ansible_connection: ansible.netcommon.network_cli
+# ansible_network_os: cisco.ios.ios
+# ansible_become: yes
+# ansible_become_method: enable
+# ansible_user: dtairych
+# ansible_password: newpassword
+# ansible_become_password: newpassword
+
+
+#   # vars:
+ansible_connection: ansible.netcommon.network_cli
+ansible_network_os: cisco.ios.ios
+ansible_become: yes
+ansible_become_method: enable
+ansible_user: ${ssh_user}
+ansible_password: ${ssh_password}
+ansible_become_password: ${ssh_password}
+
+# default_route: 116.12.15.6

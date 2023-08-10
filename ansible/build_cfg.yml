@@ -1,0 +1,5 @@
+- hosts: localhost
+- name: Open Network Interface to external management
+  import_playbook: open_cfg.yml
+- name: Build device configuration
+  import_playbook: cisco_cfg.yml

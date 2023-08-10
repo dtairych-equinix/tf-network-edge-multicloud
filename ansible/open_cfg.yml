@@ -1,0 +1,36 @@
+- hosts: localhost
+  name: Open the management interface on the Network Edge device
+  hosts: routers
+  vars_files: 
+    vars.yml
+  gather_facts: true
+  tasks: 
+    - name: Open RESTCONF interface on the Cisco Network Edge device
+      ansible.builtin.shell: |
+        exp_internal 0
+        log_user 0
+        match_max -d 1000000
+
+        set timeout 30
+        spawn ssh -i ./rsa_private_key {{ user_ }}@{{ ansible_host }}
+
+        expect "{{ hostname }}#"
+        send "conf t\r"
+        expect "{{ hostname }}(config)#"
+        send "ip http secure-server\r"
+        expect "{{ hostname }}(config)#"
+        send "restconf\r"
+        expect "{{ hostname }}(config)#"
+        send "username {{ user_ }} privilege 15 secret {{ pass_ }}\r"
+        expect "{{ hostname }}(config)#"
+        send "enable secret {{ pass_ }}\r"
+        expect "{{ hostname }}(config)#"
+        send "logout\r"
+
+        exit 0
+      args:
+        executable: /usr/bin/expect
+      register: outvar
+    - name: Print stdout
+      debug:
+        msg: "standard out: {{ outvar }}"

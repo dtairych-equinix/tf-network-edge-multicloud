@@ -80,15 +80,7 @@ variable "ssh_user" {
 
 variable "ssh_password" {
   type = string
-  sensitive = true
-  
-}
-
-
-
-variable "sku" {
-  type    = string
-  default = "c3.medium.x86"
+  sensitive = true 
 }
 
 variable "oci_interface" {
@@ -114,9 +106,7 @@ variable "aws_interconnect_network" {
   description = "Network that will be used to interconnect Network Edge to AWS (Direct Connect).  Must be a /30"
   type = string
   default = "192.168.4.0/30"
-
 }
-
 
 variable "aws_account_id" {
   description = "The account ID of the AWS tenancy that the DXG is created in"
@@ -125,6 +115,7 @@ variable "aws_account_id" {
 }
 
 variable "aws_region" {
+  description = "The AWS region in which the resources are deployed"
   type    = string
   default = "eu-central-1"
 }
@@ -138,7 +129,6 @@ variable "aws_secret" {
 
   type      = string
   sensitive = true
-
 }
 
 variable "bgp_password" {
@@ -149,7 +139,7 @@ variable "bgp_password" {
 variable "drg_asn" {
   description = "ASN of the Oracle Cloud DRG"
   type = string
-  default = "65003"
+  default = "31898"
 }
 
 variable "dxg_asn" {
@@ -162,4 +152,41 @@ variable "network_edge_asn" {
   description = "ASN of the Equinix Network Edge device"
   type = string
   default = "65000"
+}
+
+variable "clouds" {
+  description = "A collection of the various multi-cloud environments that will be connected"
+  type = map(any)
+  default = {
+    AWS = {
+      name = "AWS"
+      fabric_profile = "AWS Direct Connect"
+      speed = "50"
+      ne_interface = 4
+      interconnect_network = "192.168.4.0/30"
+      interface_ip = "192.168.4.1/30"
+      remote_ip = "192.168.4.2/30"
+      remote_asn = 65412
+      bgp_password = "test_password"
+      region = "eu-central-1"
+    },
+    OCI = {
+      name = "OCI"
+      fabric_profile = "Oracle Cloud Infrastructure -OCI- FastConnect"
+      speed = 50
+      ne_interface = 3
+      interconnect_network = "192.168.3.0/30"
+      interface_ip = "192.168.3.1/30"
+      remote_ip = "192.168.3.2/30"
+      remote_asn = 31898
+      bgp_password = "test_password"
+      region = ""
+    }
+  }
+}
+
+variable "cloud_auth_keys" {
+  description = "Variable to hold the different auths for cloud providers on Equinix Fabric"
+  sensitive = true
+  type = map(any)
 }
