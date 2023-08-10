@@ -25,6 +25,11 @@ provider "equinix" {
   auth_token    = var.equinix_metal_auth
 }
 
+# provider "oci" {
+#     auth = var.oci_auth
+#     region = var.oci_region
+# }
+
 
 provider "aws" {
   region     = var.aws_region
@@ -34,10 +39,8 @@ provider "aws" {
 
 
 provider "iosxe" {
-  // Required but Optional if env variable are set
   url = "https://${equinix_network_device.multi-cloud-router.ssh_ip_address}"
   username = var.ssh_user
   password = var.ssh_password
-  // Optional Parameters
   insecure = true
 }

@@ -1,3 +1,6 @@
+
+##### Equinix Variables ##########
+
 variable "equinix_fabric_account_name" {
   description = "Name of the Equinix Fabric account (optional).  Useful if customer has multiple Equinix Fabric accounts in a given Metro"
   type = string
@@ -17,7 +20,7 @@ variable "equinix_fabric_secret" {
 }
 
 variable "equinix_fabric_user" {
-  description = "Username of Equinix Fabric account"
+  description = "Username of Equinix Fabric account which will be used for all notifications"
   type = string
   sensitive = true
 }
@@ -40,6 +43,11 @@ variable "network_edge_metro" {
   default = "FR"
 }
 
+variable "deployment_metro" {
+  type    = string
+  default = "fr"
+}
+
 # variable "oci_auth" {
 #     description = "Oracle Cloud authentication token for API access"
 #   type = string
@@ -52,12 +60,13 @@ variable "network_edge_metro" {
 #   sensitive = true
 # }
 
+variable "oci_compartment_id" {
+  description = "The Compartment ID for all the Oracle Cloud resources"
+  type = string
+  sensitive = true
+}
 
-# variable "aws_auth" {
-#   description = "AWS Cloud authentication token for API access"
-#   type      = string
-#   sensitive = true
-# }
+#######  AWS Variables #########
 
 variable "aws_dxg_name" {
   type = string
@@ -75,10 +84,7 @@ variable "ssh_password" {
   
 }
 
-variable "deployment_metro" {
-  type    = string
-  default = "fr"
-}
+
 
 variable "sku" {
   type    = string
