@@ -55,6 +55,17 @@ One of the dependencies to execute commands against the Network Edge device is t
 ansible-galaxy collection install cisco.ios
 ```
 
+## Deploying the environment
+
+With the setup steps above complete, you can now plan and apply the Terraform environment to build the multicloud network
+
+```bash
+terraform plan
+```
+```bash
+terraform apply --auto-approve
+```
+
 ## Execution Dependencies
 
 In the current format, there are a number of dependencies for this code to execute correctly:
@@ -70,3 +81,4 @@ There are some components of this deployment that would not be considered produc
     - AWS Direct Connect: https://aws.amazon.com/directconnect/resiliency-recommendation/
 - To create a one-click deployment, Terraform is used to invoke the Ansible script that is responsible for configuration of the Equinix Network Edge device.  In a production environment, these two processes should be separated from one another
 - RESTCONF interface on Network Edge device opened by a relatively crude Except script that interfaces with the interactive CLI for the Cisco Catalyst 8000v.  This is done for the express purpose of automating the end-to-end configuration and should not be considered for production workloads
+- In the current form, Terraform creates a dynamic SSH key for the current deployment.  This is stored as plain text in the state file which is not ideal or secure.  Please consider changing the scripts to make use of a local key instead - this was only implemented to keep the codebase as a self-contained deployment
