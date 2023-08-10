@@ -28,6 +28,8 @@ Naturally, building the environment starts with cloning this repo:
 ```bash
 git clone https://github.com/dtairych-equinix/equinix-multicloud
 
+```
+```bash
 cd equinix-multicloud
 ```
 
@@ -41,7 +43,6 @@ Once installed (and still in the directory above), perform initialise the Terraf
 ```bash
 terraform init
 ```
-
 
 ### Setting up Ansible
 
@@ -68,4 +69,4 @@ There are some components of this deployment that would not be considered produc
     - Oracle FastConnect: https://docs.oracle.com/en-us/iaas/Content/Network/Concepts/fastconnectresiliency.htm
     - AWS Direct Connect: https://aws.amazon.com/directconnect/resiliency-recommendation/
 - To create a one-click deployment, Terraform is used to invoke the Ansible script that is responsible for configuration of the Equinix Network Edge device.  In a production environment, these two processes should be separated from one another
-- RESTCONF interface on Network Edge device opened by a relative Except script that interfaces with the interactive CLI for the Cisco Catalyst 8000v.  This is done for the express purpose of automating the end-to-end configuration and should not be considered for production workloads
+- RESTCONF interface on Network Edge device opened by a relatively crude Except script that interfaces with the interactive CLI for the Cisco Catalyst 8000v.  This is done for the express purpose of automating the end-to-end configuration and should not be considered for production workloads
