@@ -19,9 +19,9 @@ variable "equinix_fabric_secret" {
   sensitive = true
 }
 
-variable "equinix_fabric_user" {
+variable "equinix_fabric_users" {
   description = "Username of Equinix Fabric account which will be used for all notifications"
-  type = string
+  type = set(string)
   sensitive = true
 }
 
@@ -43,10 +43,10 @@ variable "network_edge_metro" {
   default = "FR"
 }
 
-variable "deployment_metro" {
-  type    = string
-  default = "fr"
-}
+# variable "deployment_metro" {
+#   type    = string
+#   default = "fr"
+# }
 
 # variable "oci_auth" {
 #     description = "Oracle Cloud authentication token for API access"
@@ -166,21 +166,21 @@ variable "clouds" {
       interconnect_network = "192.168.4.0/30"
       interface_ip = "192.168.4.1/30"
       remote_ip = "192.168.4.2/30"
-      remote_asn = 65412
+      remote_asn = 64512
       bgp_password = "test_password"
       region = "eu-central-1"
     },
     OCI = {
       name = "OCI"
       fabric_profile = "Oracle Cloud Infrastructure -OCI- FastConnect"
-      speed = 50
+      speed = 1000
       ne_interface = 3
       interconnect_network = "192.168.3.0/30"
       interface_ip = "192.168.3.1/30"
       remote_ip = "192.168.3.2/30"
       remote_asn = 31898
       bgp_password = "test_password"
-      region = ""
+      region = "eu-frankfurt-1"
     }
   }
 }
