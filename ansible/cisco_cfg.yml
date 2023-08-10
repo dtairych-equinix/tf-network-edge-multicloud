@@ -1,0 +1,50 @@
+- name: Cisco show version example
+  hosts: routers
+  gather_facts: true
+  vars_files: 
+    vars.yml
+  tasks:
+    - name: Enable interfaces
+      cisco.ios.ios_interfaces:
+        config:
+          - name: "GigabitEthernet{{ item.interface }}"
+            description: "Configured by Ansible for {{ item.cloud }}"
+            enabled: true
+        state: merged
+      loop: "{{ clouds }}"
+    - name: Configure interface IP addresses
+      cisco.ios.ios_l3_interfaces:
+        config:
+          - name: "GigabitEthernet{{ item.interface }}"
+            ipv4:
+              - address: "{{ item.interface_ip }}"
+        state: merged
+      loop: "{{ clouds }}"
+    - name: Create BGP router and peers
+      cisco.ios.ios_bgp_global:
+        config:
+          as_number: "{{ local_asn }}"
+          bgp:
+            advertise_best_external: true
+            bestpath:
+              - compare_routerid: true
+          neighbor:
+            - address: "{{ item.remote_ip.split('/')[0] }}"
+              description: "Peer for {{ item.cloud }}"
+              remote_as: "{{ item.remote_asn }}"
+              password_options:
+                encryption: 0
+                pass_key: "{{ item.bgp_password }}"
+          redistribute:
+            - connected:
+                metric: 10
+          timers:
+            keepalive: 100
+            holdtime: 200
+            min_holdtime: 150
+        state: merged
+      loop: "{{ clouds }}"
+  
+
+
+      

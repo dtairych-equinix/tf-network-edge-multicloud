@@ -1,16 +1,15 @@
-
 data "aws_dx_gateway" "multicloud" {
   name = var.aws_dxg_name
 }
 
 data "aws_dx_connection" "example" {
-  name = equinix_ecx_l2_connection.aws.name
+  name = equinix_ecx_l2_connection.clouds["AWS"].name
 } 
 
 resource "aws_dx_private_virtual_interface" "multicloud" {
   connection_id    = data.aws_dx_connection.example.id
   name             = "private-vif"
-  vlan             = equinix_ecx_l2_connection.aws.zside_vlan_stag
+  vlan             = equinix_ecx_l2_connection.clouds["AWS"].zside_vlan_stag
   address_family   = "ipv4"
   amazon_address   = "${cidrhost(var.aws_interconnect_network, 2)}/30"
   customer_address = "${cidrhost(var.aws_interconnect_network, 1)}/30"

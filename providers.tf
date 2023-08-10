@@ -36,11 +36,3 @@ provider "aws" {
   secret_key = var.aws_secret
   access_key = var.aws_access
 }
-
-
-provider "iosxe" {
-  url = "https://${equinix_network_device.multi-cloud-router.ssh_ip_address}"
-  username = var.ssh_user
-  password = var.ssh_password
-  insecure = true
-}
