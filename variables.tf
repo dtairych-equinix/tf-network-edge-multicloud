@@ -59,10 +59,10 @@ variable "network_edge_metro" {
 #   sensitive = true
 # }
 
-# variable "aws_dxg_id" {
-#   type = string
-#   sensitive = true
-# }
+variable "aws_dxg_name" {
+  type = string
+  sensitive = true
+}
 
 variable "ssh_user" {
   type = string
@@ -104,28 +104,36 @@ variable "oci_interconnect_network" {
 
 }
 
+variable "aws_interconnect_network" {
+  description = "Network that will be used to interconnect Network Edge to AWS (Direct Connect).  Must be a /30"
+  type = string
+  default = "192.168.4.0/30"
+
+}
+
+
 variable "aws_account_id" {
   description = "The account ID of the AWS tenancy that the DXG is created in"
   type      = string
   sensitive = true
 }
 
-# variable "aws_region" {
-#   type    = string
-#   default = "eu-central-1"
-# }
+variable "aws_region" {
+  type    = string
+  default = "eu-central-1"
+}
 
-# variable "aws_access" {
-#   type      = string
-#   sensitive = true
-# }
+variable "aws_access" {
+  type      = string
+  sensitive = true
+}
 
-# variable "aws_secret" {
+variable "aws_secret" {
 
-#   type      = string
-#   sensitive = true
+  type      = string
+  sensitive = true
 
-# }
+}
 
 variable "bgp_password" {
   type = string
@@ -141,7 +149,7 @@ variable "drg_asn" {
 variable "dxg_asn" {
   description = "ASN of the AWS Private VIF"
   type = string
-  default = "65004"
+  default = "64512"
 }
 
 variable "network_edge_asn" {
