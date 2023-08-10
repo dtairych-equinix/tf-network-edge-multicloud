@@ -1,0 +1,20 @@
+#!/usr/bin/expect -f
+
+
+exp_internal 0
+log_user 0
+match_max -d 1000000
+
+set timeout 30
+spawn ssh -i ./rsa_private_key ${ssh_user}@${ne_ip}
+
+expect "${hostname}#"
+send "conf t\r"
+expect "${hostname}(config)#"
+send "ip http secure-server\r"
+expect "${hostname}(config)#"
+send "restconf\r"
+expect "${hostname}(config)#"
+send "username ${ssh_user} privilege 15 secret ${ssh_password}\r"
+expect "${hostname}(config)#"
+send "logout\r"
