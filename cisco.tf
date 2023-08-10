@@ -28,10 +28,6 @@ resource "iosxe_interface_ethernet" "aws" {
 
 resource "iosxe_bgp" "multi-cloud" {
   asn                  = "65000"
-  # default_ipv4_unicast = false
-  # log_neighbor_changes = true
-  # router_id_loopback   = 100
-
   depends_on = [ null_resource.exec_restconf ]
 }
 
@@ -41,8 +37,6 @@ resource "iosxe_bgp_neighbor" "oci" {
   remote_as              = var.drg_asn
   description            = "BGP Neighbor OCI DRG"
   shutdown               = false
-  # update_source_loopback = "100"
-
   depends_on = [ null_resource.exec_restconf ]
 }
 
@@ -52,8 +46,6 @@ resource "iosxe_bgp_neighbor" "aws" {
   remote_as              = var.dxg_asn
   description            = "BGP Neighbor AWS DXG"
   shutdown               = false
-  # update_source_loopback = "100"
-
   depends_on = [ null_resource.exec_restconf ]
 }
 
@@ -64,14 +56,3 @@ resource "iosxe_restconf" "bgp_password_aws" {
     text = var.bgp_password
   }
 }
-
-
-
-# data "iosxe_restconf" "example" {
-#   path = "Cisco-IOS-XE-native:native/router/Cisco-IOS-XE-bgp:bgp=65000/neighbor=192.168.4.2/password"
-# }
-
-
-# output "restconf" { 
-#   value = data.iosxe_restconf.example.attributes
-# }
