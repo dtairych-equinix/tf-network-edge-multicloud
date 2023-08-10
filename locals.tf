@@ -33,6 +33,9 @@ resource "local_file" "ios_restconf" {
 resource "null_resource" "exec_restconf" {
   provisioner "local-exec" {
     command = "expect enable_restconf.exp"
+    # interpreter = [ "/usr/bin/expect", "-f" ]
+    # interpreter = [ "/bin/sh"]
+    working_dir = "${path.module}"
   }
   depends_on = [ 
     local_file.ios_restconf,
