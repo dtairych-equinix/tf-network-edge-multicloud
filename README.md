@@ -2,7 +2,7 @@
 
 This repository explores multicloud connectivity between Oracle Cloud (OCI) and Amazon Web Services (AWS) facilitated through Equinix's private connectivity (Fabric) and virtualised network functions (Network Edge)
 
-![alt text](https://github.com/dtairych-equinix/equinix-multicloud/blob/main/img/oci-aws-equinix.drawio.png)
+![alt text](https://github.com/dtairych-equinix/equinix-multicloud/blob/main/img/oci-aws-equinix.jpg)
 
 ## Pre-requisites
 
@@ -70,7 +70,7 @@ terraform apply --auto-approve
 
 In the current format, there are a number of dependencies for this code to execute correctly:
 - Network Edge Device must be a Cisco Catalyst 8000v.  The configuration of the Network Edge device is currently only supporting Cisco IOS XE.  Additional interfaces could be written, and loaded, but open_cfg.yml would also need to be appropriately updated to support the correct onboarding of a different vendor / operating system
-- As mentioned above, the machine executing the Terraform code much have support to Except.  More details on this in the "other consideration" section discussing RESTCONF
+- As mentioned above, the machine executing the Terraform code much have support to Expect.  More details on this in the "other consideration" section discussing RESTCONF
 
 ## Other considerations
 
@@ -80,5 +80,5 @@ There are some components of this deployment that would not be considered produc
     - Oracle FastConnect: https://docs.oracle.com/en-us/iaas/Content/Network/Concepts/fastconnectresiliency.htm
     - AWS Direct Connect: https://aws.amazon.com/directconnect/resiliency-recommendation/
 - To create a one-click deployment, Terraform is used to invoke the Ansible script that is responsible for configuration of the Equinix Network Edge device.  In a production environment, these two processes should be separated from one another
-- RESTCONF interface on Network Edge device opened by a relatively crude Except script that interfaces with the interactive CLI for the Cisco Catalyst 8000v.  This is done for the express purpose of automating the end-to-end configuration and should not be considered for production workloads
+- RESTCONF interface on Network Edge device opened by a relatively crude Expect script that interfaces with the interactive CLI for the Cisco Catalyst 8000v.  This is done for the express purpose of automating the end-to-end configuration and should not be considered for production workloads
 - In the current form, Terraform creates a dynamic SSH key for the current deployment.  This is stored as plain text in the state file which is not ideal or secure.  Please consider changing the scripts to make use of a local key instead - this was only implemented to keep the codebase as a self-contained deployment
