@@ -2,11 +2,11 @@
 
 This repository explores multicloud connectivity between Oracle Cloud (OCI) and Amazon Web Services (AWS) facilitated through Equinix's private connectivity (Fabric) and virtualised network functions (Network Edge)
 
-*Insert Diagram
+![alt text](https://github.com/dtairych-equinix/equinix-multicloud/blob/main/img/oci-aws-equinix.drawio.png)
 
 ## Pre-requisites
 
--Equinix Fabric Account
+- Equinix Fabric Account
     - Account needs to have permissions for Equinix Fabric and Network Edge which can be configured through ECP
     - User must create a create API credentials through the Developer portal (insert link) which are loaded into the *.tfvars file and consumed by Terraform to create resources (Network Edge device and Fabric)
 - AWS Account
