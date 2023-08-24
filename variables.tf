@@ -13,6 +13,13 @@ variable "equinix_fabric_id" {
   sensitive = true
 }
 
+variable "network_edge_asn" {
+  description = "ASN of the Network Edge device"
+  type = string
+  default = 65000
+  
+}
+
 variable "equinix_fabric_secret" {
     description = "Equinix Fabric client secret for API access"
   type      = string
@@ -59,12 +66,6 @@ variable "ssh_password" {
 
 variable "aws_dxg_name" {
   type = string
-  sensitive = true
-}
-
-variable "aws_account_id" {
-  description = "The account ID of the AWS tenancy that the DXG is created in"
-  type      = string
   sensitive = true
 }
 
