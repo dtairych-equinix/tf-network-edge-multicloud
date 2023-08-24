@@ -32,6 +32,23 @@
             - address: "{{ item.remote_ip.split('/')[0] }}"
               description: "Peer for {{ item.cloud }}"
               remote_as: "{{ item.remote_asn }}"
+              # password_options:
+              #   encryption: 0
+              #   pass_key: "{{ item.bgp_password }}"
+          redistribute:
+            - connected:
+                metric: 10
+        state: merged
+      loop: "{{ clouds }}"
+    - name: Add password to AWS connection only
+      cisco.ios.ios_bgp_global:
+        config:
+          as_number: "{{ local_asn }}"
+          bgp:
+          neighbor:
+            - address: "{{ item.remote_ip.split('/')[0] }}"
+              # description: "Peer for {{ item.cloud }}"
+              # remote_as: "{{ item.remote_asn }}"
               password_options:
                 encryption: 0
                 pass_key: "{{ item.bgp_password }}"
@@ -40,6 +57,7 @@
                 metric: 10
         state: merged
       loop: "{{ clouds }}"
+      when: item.cloud=='AWS'
   
 
 
